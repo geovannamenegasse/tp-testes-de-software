@@ -73,6 +73,148 @@ describe('divisao', () => {
     });
 });
 
+describe('soma', () => {
+    describe('2 números inteiros são passados como parâmetro ==> retorna a soma dos dois', () => {
+        test.each([
+            { numeroEsquerdo: 6,                       numeroDireito: 3,                       retornoEsperado: 9 },
+            { numeroEsquerdo: 4,                       numeroDireito: 2,                       retornoEsperado: 6 },
+            { numeroEsquerdo: -12,                     numeroDireito: 3,                       retornoEsperado: -9 },
+            { numeroEsquerdo: -12,                     numeroDireito: -3,                      retornoEsperado: -15 },
+            { numeroEsquerdo: 10,                      numeroDireito: 3,                       retornoEsperado: 13 },
+            { numeroEsquerdo: Number.MAX_SAFE_INTEGER, numeroDireito: -5,                      retornoEsperado: 9007199254740986 },
+            { numeroEsquerdo: 1,                      numeroDireito: Number.MIN_SAFE_INTEGER,  retornoEsperado: -9007199254740990 }
+        ])
+        ('%j', ({ numeroEsquerdo, numeroDireito, retornoEsperado }) => {
+            expect(calculadora.soma(numeroEsquerdo, numeroDireito)).toBe(retornoEsperado);
+        });
+    });
+
+    describe('2 números são passados como parâmetro, e um deles ou ambos são float ==> retorna a soma dos dois', () => {
+        test.each([
+            { numeroEsquerdo: 7.5224455678,           numeroDireito: 2.7666,                 retornoEsperado: 10.2890455678 },
+            { numeroEsquerdo: 7.5224455678,           numeroDireito: -2,                     retornoEsperado: 5.5224455678 },
+            { numeroEsquerdo: Number.MAX_VALUE,       numeroDireito: 4.2,                    retornoEsperado: 1.7976931348623157e+308 },
+            { numeroEsquerdo: 8,                      numeroDireito: Number.MIN_VALUE,       retornoEsperado: 8 }
+        ])('%j', ({ numeroEsquerdo, numeroDireito, retornoEsperado }) => {
+            expect(calculadora.soma(numeroEsquerdo, numeroDireito)).toBeCloseTo(retornoEsperado, 16);
+        });
+    });
+
+    describe('algum dos parâmetros não é um número ==> lança exceção', () => {
+        test.each([        
+            { numeroEsquerdo: "uma string"     , numeroDireito: 2.7666 },           
+            { numeroEsquerdo: true             , numeroDireito: -2               },               
+            { numeroEsquerdo: { atributo: 1 }  , numeroDireito: 4.2              },              
+            { numeroEsquerdo: () => {}         , numeroDireito: Number. MAX_VALUE },
+            { numeroEsquerdo: 2.7666           , numeroDireito: "uma string"     }, 
+            { numeroEsquerdo: -2               , numeroDireito: true             },         
+            { numeroEsquerdo: 4.2              , numeroDireito: { atributo: 1 }    },
+            { numeroEsquerdo: Number. MAX_VALUE, numeroDireito: () => {}         }     
+        ])('%j', ({ numeroEsquerdo, numeroDireito }) => {
+            expect(() => {
+                calculadora.soma(numeroEsquerdo, numeroDireito);
+            }).toThrow(TypeError);
+        });
+    });
+});
+
+describe('subtracao', () => {
+    describe('2 números inteiros são passados como parâmetro ==> retorna a subtração dos dois', () => {
+        test.each([
+            { numeroEsquerdo: 6,                       numeroDireito: 3,                       retornoEsperado: 3 },
+            { numeroEsquerdo: 4,                       numeroDireito: 2,                       retornoEsperado: 2 },
+            { numeroEsquerdo: -12,                     numeroDireito: 3,                       retornoEsperado: -15 },
+            { numeroEsquerdo: -12,                     numeroDireito: -3,                      retornoEsperado: -9 },
+            { numeroEsquerdo: 10,                      numeroDireito: 3,                       retornoEsperado: 7 },
+            { numeroEsquerdo: Number.MAX_SAFE_INTEGER, numeroDireito: 5,                      retornoEsperado: 9007199254740986 },
+            { numeroEsquerdo: -1,                       numeroDireito: Number.MIN_SAFE_INTEGER, retornoEsperado: 9007199254740990 }
+        ])
+        ('%j', ({ numeroEsquerdo, numeroDireito, retornoEsperado }) => {
+            expect(calculadora.subtracao(numeroEsquerdo, numeroDireito)).toBe(retornoEsperado);
+        });
+    });
+
+    describe('2 números são passados como parâmetro, e um deles ou ambos são float ==> retorna a subtração dos dois', () => {
+        test.each([
+            { numeroEsquerdo: 7.5224455678,           numeroDireito: 2.7666,                 retornoEsperado: 4.7558455678 },
+            { numeroEsquerdo: 7.5224455678,           numeroDireito: -2,                     retornoEsperado: 9.5224455678 },
+            { numeroEsquerdo: Number.MAX_VALUE,       numeroDireito: 4.2,                    retornoEsperado: 1.7976931348623157e+308 },
+            { numeroEsquerdo: 8,                      numeroDireito: Number.MIN_VALUE,       retornoEsperado: 8 }
+        ])('%j', ({ numeroEsquerdo, numeroDireito, retornoEsperado }) => {
+            expect(calculadora.subtracao(numeroEsquerdo, numeroDireito)).toBeCloseTo(retornoEsperado, 16);
+        });
+    });
+
+    describe('algum dos parâmetros não é um número ==> lança exceção', () => {
+        test.each([        
+            { numeroEsquerdo: "uma string"     , numeroDireito: 2.7666 },           
+            { numeroEsquerdo: true             , numeroDireito: -2               },               
+            { numeroEsquerdo: { atributo: 1 }  , numeroDireito: 4.2              },              
+            { numeroEsquerdo: () => {}         , numeroDireito: Number. MAX_VALUE },
+            { numeroEsquerdo: 2.7666           , numeroDireito: "uma string"     }, 
+            { numeroEsquerdo: -2               , numeroDireito: true             },         
+            { numeroEsquerdo: 4.2              , numeroDireito: { atributo: 1 }    },
+            { numeroEsquerdo: Number. MAX_VALUE, numeroDireito: () => {}         }     
+        ])('%j', ({ numeroEsquerdo, numeroDireito }) => {
+            expect(() => {
+                calculadora.subtracao(numeroEsquerdo, numeroDireito);
+            }).toThrow(TypeError);
+        });
+    });
+});
+
+describe('multiplicacao', () => {
+    describe('2 números inteiros são passados como parâmetro ==> retorna a multiplicacao dos dois', () => {
+        test.each([
+            { numeroEsquerdo: 6,                       numeroDireito: 3,                        retornoEsperado: 18 },
+            { numeroEsquerdo: 4,                       numeroDireito: 2,                        retornoEsperado: 8 },
+            { numeroEsquerdo: -12,                     numeroDireito: 3,                        retornoEsperado: -36 },
+            { numeroEsquerdo: -12,                     numeroDireito: -3,                       retornoEsperado: 36 },
+            { numeroEsquerdo: 10,                      numeroDireito: 3,                        retornoEsperado: 30 },
+            { numeroEsquerdo: 4,                       numeroDireito: 1,                        retornoEsperado: 4 },
+            { numeroEsquerdo: 10,                      numeroDireito: 0,                        retornoEsperado: 0 },
+            { numeroEsquerdo: 1,                       numeroDireito: 4,                        retornoEsperado: 4 },
+            { numeroEsquerdo: 0,                       numeroDireito: 10,                       retornoEsperado: 0 },
+            { numeroEsquerdo: Number.MAX_SAFE_INTEGER/5, numeroDireito: 5,                        retornoEsperado: 9007199254740991 },
+            { numeroEsquerdo: -1,                      numeroDireito: Number.MIN_SAFE_INTEGER,  retornoEsperado: 9007199254740991 }
+        ])
+        ('%j', ({ numeroEsquerdo, numeroDireito, retornoEsperado }) => {
+            expect(calculadora.multiplicacao(numeroEsquerdo, numeroDireito)).toBe(retornoEsperado);
+        });
+    });
+
+    describe('2 números são passados como parâmetro, e um deles ou ambos são float ==> retorna a multiplicacao dos dois', () => {
+        test.each([
+            { numeroEsquerdo: 7.5224455678,           numeroDireito: 2.7666,                 retornoEsperado: 20.81159790787548 },
+            { numeroEsquerdo: 7.5224455678,           numeroDireito: -2,                     retornoEsperado: -15.0448911356 },
+            { numeroEsquerdo: Number.MAX_VALUE/4.2,   numeroDireito: 4.2,                retornoEsperado: 1.7976931348623157e+308 },
+            { numeroEsquerdo: 8,                      numeroDireito: Number.MIN_VALUE,       retornoEsperado: 4e-323 }
+            //TODO: testar o resultado infinity e -infinity
+        ])('%j', ({ numeroEsquerdo, numeroDireito, retornoEsperado }) => {
+            expect(calculadora.multiplicacao(numeroEsquerdo, numeroDireito)).toBeCloseTo(retornoEsperado, 16);
+        });
+    });
+
+    describe('algum dos parâmetros não é um número ==> lança exceção', () => {
+        test.each([        
+            { numeroEsquerdo: "uma string"     , numeroDireito: 2.7666 },           
+            { numeroEsquerdo: true             , numeroDireito: -2               },               
+            { numeroEsquerdo: { atributo: 1 }  , numeroDireito: 4.2              },              
+            { numeroEsquerdo: () => {}         , numeroDireito: Number. MAX_VALUE },
+            { numeroEsquerdo: 2.7666           , numeroDireito: "uma string"     }, 
+            { numeroEsquerdo: -2               , numeroDireito: true             },         
+            { numeroEsquerdo: 4.2              , numeroDireito: { atributo: 1 }    },
+            { numeroEsquerdo: Number. MAX_VALUE, numeroDireito: () => {}         }     
+        ])('%j', ({ numeroEsquerdo, numeroDireito }) => {
+            expect(() => {
+                calculadora.multiplicacao(numeroEsquerdo, numeroDireito);
+            }).toThrow(TypeError);
+        });
+    });
+});
+
+
+
 describe('raizQuadrada', () => {
     describe('um número é passado como parâmetro ==> retorna a raiz quadrada do número', () => {
         test.each([

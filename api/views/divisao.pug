@@ -1,0 +1,28 @@
+head
+  meta(charset='utf-8')
+  title #{title}
+  link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css')
+
+  body
+    .modal-dialog
+      .modal-content
+        // Modal Header
+        .modal-header
+          button.close(type="button", data-dismiss="modal")
+            span(aria-hidden="true") ×
+            span.sr-only Close
+          h4#myModalLabel.modal-title
+            | Calculadora
+        // Modal Body
+        .modal-body
+          form(role='form' method='POST' action='/divisao')
+            div.form-group
+              label(for='num1') Número 1:
+              input#name.form-control(type='number', placeholder='Número 1' name='num1')
+            div.form-group
+              label(for='num2') Número 2:
+              input#email.form-control(type='number', placeholder='Número 2' name='num2')
+            button.btn.btn-primary(type="submit", name="asdf") = 
+        // Modal Footer
+        .modal-footer
+          h4 #{resultado}

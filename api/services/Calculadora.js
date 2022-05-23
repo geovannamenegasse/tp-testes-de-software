@@ -1,4 +1,19 @@
 class Calculadora {
+  
+  multiplicacao(a, b) {
+    if (typeof a != 'number' || typeof b != 'number') throw new TypeError();
+    return a * b;
+  }
+
+  subtracao(a, b) {
+    if (typeof a != 'number' || typeof b != 'number') throw new TypeError();
+    return a - b;
+  }
+
+  soma(a, b) {
+    if (typeof a != 'number' || typeof b != 'number') throw new TypeError();
+    return a + b;
+  }
   /**
    * Retorna um float ** TESTADO
    */
