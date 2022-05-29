@@ -1,0 +1,25 @@
+head
+  meta(charset='utf-8')
+  title #{title}
+  link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css')
+
+  body
+    .modal-dialog
+      .modal-content
+        // Modal Header
+        .modal-header
+          button.close(type="button", data-dismiss="modal")
+            span(aria-hidden="true") ×
+            span.sr-only Close
+          h4#myModalLabel.modal-title
+            | Calculadora
+        // Modal Body
+        .modal-body
+          form(role='form' method='POST' action='/cosseno/rads')
+            div.form-group
+              label(for='num') Número:
+              input#name.form-control(placeholder='Número' name='num')
+            button.btn.btn-primary(type="submit", name="asdf") = 
+        // Modal Footer
+        .modal-footer
+          h4 #{resultado}

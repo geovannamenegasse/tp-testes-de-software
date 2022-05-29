@@ -14,6 +14,9 @@ var subtracaoRouter = require('./routes/subtracao');
 var multiplicacaoRouter = require('./routes/multiplicacao');
 var potenciaRouter = require('./routes/potencia');
 var fatorialRouter = require('./routes/fatorial');
+var senoRouter = require('./routes/seno');
+var cossenoRouter = require('./routes/cosseno');
+var tangenteRouter = require('./routes/tangente');
 
 var app = express();
 
@@ -35,6 +38,9 @@ app.use('/subtracao', subtracaoRouter);
 app.use('/multiplicacao', multiplicacaoRouter);
 app.use('/potencia', potenciaRouter);
 app.use('/fatorial', fatorialRouter);
+app.use('/seno', senoRouter);
+app.use('/cosseno', cossenoRouter);
+app.use('/tangente', tangenteRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
