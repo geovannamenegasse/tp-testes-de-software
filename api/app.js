@@ -12,6 +12,8 @@ var divisaoRouter = require('./routes/divisao');
 var somaRouter = require('./routes/soma');
 var subtracaoRouter = require('./routes/subtracao');
 var multiplicacaoRouter = require('./routes/multiplicacao');
+var potenciaRouter = require('./routes/potencia');
+var fatorialRouter = require('./routes/fatorial');
 
 var app = express();
 
@@ -31,6 +33,8 @@ app.use('/divisao', divisaoRouter);
 app.use('/soma', somaRouter);
 app.use('/subtracao', subtracaoRouter);
 app.use('/multiplicacao', multiplicacaoRouter);
+app.use('/potencia', potenciaRouter);
+app.use('/fatorial', fatorialRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

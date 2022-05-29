@@ -48,6 +48,24 @@ class Calculadora {
     divisores.push(numero);
     return divisores;
   }
+
+  potencia(a, b) {
+    if (typeof a != 'number' || typeof b != 'number' || Number.isNaN(a) || Number.isNaN(b)) throw new TypeError();
+    if (a === 0 && b <= 0) throw new Error('Indeterminação')
+    return Math.pow(a, b);
+  }
+
+  fatorial(a) {
+    if (typeof a != 'number' || Number.isNaN(a)) throw new TypeError();
+    if (a < 0) throw new Error('Número menor que 0');
+    if (!Number.isInteger(a)) throw new Error('Número não é inteiro');
+    let resultado = a;
+    for (let i = a - 1; i > 1; i--) {
+      resultado *= i;
+    }
+
+    return resultado;
+  }
 }
 
 module.exports = new Calculadora();

@@ -310,3 +310,133 @@ describe('divisores', () => {
         );
     });
 });
+
+describe('potencia', () => {
+    describe('base igual a 0 e expoente menor ou igual a 0 ==> lança exceção de indeterminação', () => {
+        test.each([
+            { numeroEsquerdo: 0, numeroDireito: 0 },
+            { numeroEsquerdo: 0, numeroDireito: -1 },
+            { numeroEsquerdo: 0, numeroDireito: Number.MIN_SAFE_INTEGER }
+        ])
+        ('%j', ({ numeroEsquerdo, numeroDireito }) => {
+            expect(() => {
+                calculadora.potencia(numeroEsquerdo, numeroDireito);
+            }).toThrow(new Error('Indeterminação'));
+        });
+    });
+
+    describe('2 números inteiros são passados como parâmetro ==> retorna a potencia dos dois', () => {
+        test.each([
+            { numeroEsquerdo: 0, numeroDireito: 1, retornoEsperado: 0 },
+            { numeroEsquerdo: 0, numeroDireito: 2, retornoEsperado: 0 },
+            { numeroEsquerdo: 1, numeroDireito: 0, retornoEsperado: 1 },
+
+            { numeroEsquerdo: 1, numeroDireito: 1, retornoEsperado: 1 },
+            { numeroEsquerdo: 1, numeroDireito: 2, retornoEsperado: 1 },
+            { numeroEsquerdo: 1, numeroDireito: -1, retornoEsperado: 1 },
+            { numeroEsquerdo: 1, numeroDireito: -2, retornoEsperado: 1 },
+            
+            { numeroEsquerdo: -1, numeroDireito: 0, retornoEsperado: 1 },
+            { numeroEsquerdo: -1, numeroDireito: 1, retornoEsperado: -1 },
+            { numeroEsquerdo: -1, numeroDireito: 2, retornoEsperado: 1 },
+            { numeroEsquerdo: -1, numeroDireito: -1, retornoEsperado: -1 },
+            { numeroEsquerdo: -1, numeroDireito: -2, retornoEsperado: 1 },
+
+            { numeroEsquerdo: 2, numeroDireito: 2, retornoEsperado: 4 },
+            { numeroEsquerdo: 2, numeroDireito: 3, retornoEsperado: 8 },
+            { numeroEsquerdo: 2, numeroDireito: 10, retornoEsperado: 1024 },
+            { numeroEsquerdo: 2, numeroDireito: 53, retornoEsperado: Number.MAX_SAFE_INTEGER + 1 },
+
+            { numeroEsquerdo: 5, numeroDireito: 2, retornoEsperado: 25 },
+            { numeroEsquerdo: 5, numeroDireito: 4, retornoEsperado: 625 },
+        ])
+        ('%j', ({ numeroEsquerdo, numeroDireito, retornoEsperado }) => {
+            expect(calculadora.potencia(numeroEsquerdo, numeroDireito)).toBe(retornoEsperado);
+        });
+    });
+
+    describe('2 números são passados como parâmetro, e um deles ou ambos são float ==> retorna a multiplicacao dos dois', () => {
+        test.each([
+            { numeroEsquerdo: 7.5,           numeroDireito: 2.7,                 retornoEsperado: 230.49707106142748 },
+            { numeroEsquerdo: 3.3,           numeroDireito: 2,                     retornoEsperado: 10.889999999999999 },
+            { numeroEsquerdo: 5,           numeroDireito: 3.5,                     retornoEsperado: 279.5084971874737 },
+            
+            { numeroEsquerdo: 6,           numeroDireito: -5.1,                     retornoEsperado: 0.00010750498997915862 },
+            { numeroEsquerdo: 1.79,           numeroDireito: 308,                     retornoEsperado: Number.MAX_VALUE }
+        ])('%j', ({ numeroEsquerdo, numeroDireito, retornoEsperado }) => {
+            expect(calculadora.potencia(numeroEsquerdo, numeroDireito)).toBeCloseTo(retornoEsperado, 16);
+        });
+    });
+
+    describe('algum dos parâmetros não é um número ==> lança exceção', () => {
+        test.each([        
+            { numeroEsquerdo: "uma string"     , numeroDireito: 2.7666 },           
+            { numeroEsquerdo: true             , numeroDireito: -2               },               
+            { numeroEsquerdo: { atributo: 1 }  , numeroDireito: 4.2              },              
+            { numeroEsquerdo: () => {}         , numeroDireito: Number.MAX_VALUE },
+            { numeroEsquerdo: 2.7666           , numeroDireito: "uma string"     }, 
+            { numeroEsquerdo: -2               , numeroDireito: true             },         
+            { numeroEsquerdo: 4.2              , numeroDireito: { atributo: 1 }    },
+            { numeroEsquerdo: Number.MAX_VALUE, numeroDireito: () => {}         }     
+        ])('%j', ({ numeroEsquerdo, numeroDireito }) => {
+            expect(() => {
+                calculadora.potencia(numeroEsquerdo, numeroDireito);
+            }).toThrow(TypeError);
+        });
+    });
+});
+
+describe('fatorial', () => {
+    describe('fatorial de número negativo ==> lança exceção de número menor que 0', () => {
+        test.each([
+            { numeroEsquerdo: -1 },
+            { numeroEsquerdo: -2 },
+            { numeroEsquerdo: Number.MIN_SAFE_INTEGER }
+        ])
+        ('%j', ({ numeroEsquerdo }) => {
+            expect(() => {
+                calculadora.fatorial(numeroEsquerdo);
+            }).toThrow(new Error('Número menor que 0'));
+        });
+    });
+
+    describe('fatorial de número decimal ==> lança exceção de número não inteiro', () => {
+        test.each([
+            { numeroEsquerdo: 1.2 },
+            { numeroEsquerdo: 75.8 },
+            { numeroEsquerdo: 150.7 },
+        ])
+        ('%j', ({ numeroEsquerdo }) => {
+            expect(() => {
+                calculadora.fatorial(numeroEsquerdo);
+            }).toThrow(new Error('Número não é inteiro'));
+        });
+    });
+
+    describe('número inteiro passado como parâmetro ==> retorna o fatorial do número', () => {
+        test.each([
+            { numeroEsquerdo: 0, retornoEsperado: 1 },
+            { numeroEsquerdo: 1, retornoEsperado: 1 },
+            { numeroEsquerdo: 2, retornoEsperado: 2 },
+            { numeroEsquerdo: 5, retornoEsperado: 120 },
+            { numeroEsquerdo: 24, retornoEsperado: Math.pow(6.204484, 23) },
+            { numeroEsquerdo: 50, retornoEsperado: Math.pow(3.0414093, 64) }
+        ])
+        ('%j', ({ numeroEsquerdo, numeroDireito, retornoEsperado }) => {
+            expect(calculadora.fatorial(numeroEsquerdo)).toBe(retornoEsperado);
+        });
+    });
+
+    describe('algum dos parâmetros não é um número ==> lança exceção', () => {
+        test.each([        
+            { numeroEsquerdo: "uma string" },           
+            { numeroEsquerdo: true },               
+            { numeroEsquerdo: { atributo: 1 } },              
+            { numeroEsquerdo: () => {} },
+        ])('%j', ({ numeroEsquerdo }) => {
+            expect(() => {
+                calculadora.fatorial(numeroEsquerdo, numeroDireito);
+            }).toThrow(TypeError);
+        });
+    });
+});
