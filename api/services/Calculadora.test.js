@@ -355,14 +355,12 @@ describe('potencia', () => {
         });
     });
 
-    describe('2 números são passados como parâmetro, e um deles ou ambos são float ==> retorna a multiplicacao dos dois', () => {
+    describe('2 números são passados como parâmetro, e um deles ou ambos são float ==> retorna a potencia dos dois', () => {
         test.each([
             { numeroEsquerdo: 7.5,           numeroDireito: 2.7,                 retornoEsperado: 230.49707106142748 },
             { numeroEsquerdo: 3.3,           numeroDireito: 2,                     retornoEsperado: 10.889999999999999 },
             { numeroEsquerdo: 5,           numeroDireito: 3.5,                     retornoEsperado: 279.5084971874737 },
-            
-            { numeroEsquerdo: 6,           numeroDireito: -5.1,                     retornoEsperado: 0.00010750498997915862 },
-            { numeroEsquerdo: 1.79,           numeroDireito: 308,                     retornoEsperado: Number.MAX_VALUE }
+            { numeroEsquerdo: 6,           numeroDireito: -5.1,                     retornoEsperado: 0.00010750498997915862 }
         ])('%j', ({ numeroEsquerdo, numeroDireito, retornoEsperado }) => {
             expect(calculadora.potencia(numeroEsquerdo, numeroDireito)).toBeCloseTo(retornoEsperado, 16);
         });
@@ -418,9 +416,7 @@ describe('fatorial', () => {
             { numeroEsquerdo: 0, retornoEsperado: 1 },
             { numeroEsquerdo: 1, retornoEsperado: 1 },
             { numeroEsquerdo: 2, retornoEsperado: 2 },
-            { numeroEsquerdo: 5, retornoEsperado: 120 },
-            { numeroEsquerdo: 24, retornoEsperado: Math.pow(6.204484, 23) },
-            { numeroEsquerdo: 50, retornoEsperado: Math.pow(3.0414093, 64) }
+            { numeroEsquerdo: 5, retornoEsperado: 120 }
         ])
         ('%j', ({ numeroEsquerdo, numeroDireito, retornoEsperado }) => {
             expect(calculadora.fatorial(numeroEsquerdo)).toBe(retornoEsperado);
@@ -435,7 +431,7 @@ describe('fatorial', () => {
             { numeroEsquerdo: () => {} },
         ])('%j', ({ numeroEsquerdo }) => {
             expect(() => {
-                calculadora.fatorial(numeroEsquerdo, numeroDireito);
+                calculadora.fatorial(numeroEsquerdo)
             }).toThrow(TypeError);
         });
     });

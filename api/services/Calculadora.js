@@ -59,6 +59,7 @@ class Calculadora {
     if (typeof a != 'number' || Number.isNaN(a)) throw new TypeError();
     if (a < 0) throw new Error('Número menor que 0');
     if (!Number.isInteger(a)) throw new Error('Número não é inteiro');
+    if (a === 0) return 1;
     let resultado = a;
     for (let i = a - 1; i > 1; i--) {
       resultado *= i;
