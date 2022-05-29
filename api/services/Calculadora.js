@@ -66,6 +66,22 @@ class Calculadora {
 
     return resultado;
   }
+
+  seno(numero) {
+    if (typeof numero != 'number') throw new TypeError();
+    return Math.sin(numero);
+  }
+
+  cosseno(numero) {
+    if (typeof numero != 'number') throw new TypeError();
+    return Math.cos(numero);  
+  }
+
+  tangente(numero) {
+    if (typeof numero != 'number') throw new TypeError();
+    if (numero % Math.PI == (Math.PI/2)) throw new Error('Tangente não existente');
+    return Math.tan(numero);
+  }
 }
 
 module.exports = new Calculadora();

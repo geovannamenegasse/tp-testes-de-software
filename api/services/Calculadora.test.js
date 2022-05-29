@@ -438,6 +438,9 @@ describe('fatorial', () => {
                 calculadora.fatorial(numeroEsquerdo, numeroDireito);
             }).toThrow(TypeError);
         });
+    });
+});
+
 describe('seno', () => {
     describe('um número é passado como parâmetro ==> retorna o seno do número', () => {
         test.each([
