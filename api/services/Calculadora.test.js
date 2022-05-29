@@ -319,7 +319,7 @@ describe('seno', () => {
             { numero: 7 * Math.PI / 2  , retornoEsperado: -1                  },
             { numero: 2                , retornoEsperado: 0.90929742682       }
         ])('%j', ({ numero, retornoEsperado }) => {
-            expect(calculadora.seno(numero)).toBe(retornoEsperado);
+            expect(calculadora.seno(numero)).toBeCloseTo(retornoEsperado);
         });
     });
 
@@ -347,7 +347,7 @@ describe('cosseno', () => {
             { numero: 7 * Math.PI      , retornoEsperado: -1                  },
             { numero: 4                , retornoEsperado: -0.65364362086      }
         ])('%j', ({ numero, retornoEsperado }) => {
-            expect(calculadora.cosseno(numero)).toBe(retornoEsperado);
+            expect(calculadora.cosseno(numero)).toBeCloseTo(retornoEsperado);
         });
     });
 
@@ -375,14 +375,13 @@ describe('tangente', () => {
             { numero: Math.PI / 4      , retornoEsperado: 1                   },
             { numero: 2                , retornoEsperado: -2.18503986326      }
         ])('%j', ({ numero, retornoEsperado }) => {
-            expect(calculadora.tangente(numero)).toBe(retornoEsperado);
+            expect(calculadora.tangente(numero)).toBeCloseTo(retornoEsperado);
         });
     });
 
     describe('o cosseno do número é igual a 0 ==> lança exceção', () => {
         test.each([
-            {numero: -47.7644},
-            {numero: -140}
+            {numero: 5 * Math.PI / 2},
         ])(
             '%j',
             ({numero}) => {
