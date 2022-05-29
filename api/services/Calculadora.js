@@ -68,19 +68,38 @@ class Calculadora {
     return resultado;
   }
 
-  seno(numero) {
+  senoRads(numero) {
     if (typeof numero != 'number') throw new TypeError();
     return Math.sin(numero);
   }
 
-  cosseno(numero) {
+  cossenoRads(numero) {
     if (typeof numero != 'number') throw new TypeError();
     return Math.cos(numero);  
   }
 
-  tangente(numero) {
+  tangenteRads(numero) {
     if (typeof numero != 'number') throw new TypeError();
     if (numero % Math.PI == (Math.PI/2)) throw new Error('Tangente não existente');
+    return Math.tan(numero);
+  }
+
+  senoGraus(numero) {
+    if (typeof numero != 'number') throw new TypeError();
+    numero = numero / 180 * Math.PI;
+    return Math.sin(numero);
+  }
+
+  cossenoGraus(numero) {
+    if (typeof numero != 'number') throw new TypeError();
+    numero = numero / 180 * Math.PI;
+    return Math.cos(numero);  
+  }
+
+  tangenteGraus(numero) {
+    if (typeof numero != 'number') throw new TypeError();
+    if (numero % 180 == 90) throw new Error('Tangente não existente');
+    numero = numero / 180 * Math.PI;
     return Math.tan(numero);
   }
 }

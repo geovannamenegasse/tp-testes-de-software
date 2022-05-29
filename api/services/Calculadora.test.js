@@ -437,7 +437,7 @@ describe('fatorial', () => {
     });
 });
 
-describe('seno', () => {
+describe('seno em radianos', () => {
     describe('um número é passado como parâmetro ==> retorna o seno do número', () => {
         test.each([
             { numero: 0                , retornoEsperado: 0                   },
@@ -445,7 +445,7 @@ describe('seno', () => {
             { numero: 7 * Math.PI / 2  , retornoEsperado: -1                  },
             { numero: 2                , retornoEsperado: 0.90929742682       }
         ])('%j', ({ numero, retornoEsperado }) => {
-            expect(calculadora.seno(numero)).toBeCloseTo(retornoEsperado);
+            expect(calculadora.senoRads(numero)).toBeCloseTo(retornoEsperado);
         });
     });
 
@@ -458,14 +458,14 @@ describe('seno', () => {
             '%j',
             ({numero}) => {
                 expect(() => {
-                    calculadora.seno(numero);
+                    calculadora.senoRads(numero);
                 }).toThrow(new TypeError());
             }
         );
     });
 });
 
-describe('cosseno', () => {
+describe('cosseno em radianos', () => {
     describe('um número é passado como parâmetro ==> retorna o cosseno do número', () => {
         test.each([
             { numero: 0                , retornoEsperado: 1                   },
@@ -473,7 +473,7 @@ describe('cosseno', () => {
             { numero: 7 * Math.PI      , retornoEsperado: -1                  },
             { numero: 4                , retornoEsperado: -0.65364362086      }
         ])('%j', ({ numero, retornoEsperado }) => {
-            expect(calculadora.cosseno(numero)).toBeCloseTo(retornoEsperado);
+            expect(calculadora.cossenoRads(numero)).toBeCloseTo(retornoEsperado);
         });
     });
 
@@ -486,14 +486,14 @@ describe('cosseno', () => {
             '%j',
             ({numero}) => {
                 expect(() => {
-                    calculadora.cosseno(numero);
+                    calculadora.cossenoRads(numero);
                 }).toThrow(new TypeError());
             }
         );
     });
 });
 
-describe('tangente', () => {
+describe('tangente em radianos', () => {
     describe('um número é passado como parâmetro ==> retorna a tangente do número', () => {
         test.each([
             { numero: 0                , retornoEsperado: 0                   },
@@ -501,7 +501,7 @@ describe('tangente', () => {
             { numero: Math.PI / 4      , retornoEsperado: 1                   },
             { numero: 2                , retornoEsperado: -2.18503986326      }
         ])('%j', ({ numero, retornoEsperado }) => {
-            expect(calculadora.tangente(numero)).toBeCloseTo(retornoEsperado);
+            expect(calculadora.tangenteRads(numero)).toBeCloseTo(retornoEsperado);
         });
     });
 
@@ -512,7 +512,7 @@ describe('tangente', () => {
             '%j',
             ({numero}) => {
                 expect(() => {
-                    calculadora.tangente(numero);
+                    calculadora.tangenteRads(numero);
                 }).toThrow(new Error('Tangente não existente'));
             }
         );
@@ -527,7 +527,105 @@ describe('tangente', () => {
             '%j',
             ({numero}) => {
                 expect(() => {
-                    calculadora.tangente(numero);
+                    calculadora.tangenteRads(numero);
+                }).toThrow(new TypeError());
+            }
+        );
+    });
+});
+
+describe('seno em graus', () => {
+    describe('um número é passado como parâmetro ==> retorna o seno do número', () => {
+        test.each([
+            { numero: 0         , retornoEsperado: 0                   },
+            { numero: 3690      , retornoEsperado: 1                   },
+            { numero: 630       , retornoEsperado: -1                  },
+            { numero: -129      , retornoEsperado: -0.77714596145      }
+        ])('%j', ({ numero, retornoEsperado }) => {
+            expect(calculadora.senoGraus(numero)).toBeCloseTo(retornoEsperado);
+        });
+    });
+
+    describe('o parâmetro não é um número ==> lança exceção', () => {
+        test.each([
+            {numero: () => {}},
+            {numero: 'uma string'},
+            {numero: {}}
+        ])(
+            '%j',
+            ({numero}) => {
+                expect(() => {
+                    calculadora.senoGraus(numero);
+                }).toThrow(new TypeError());
+            }
+        );
+    });
+});
+
+describe('cosseno em graus', () => {
+    describe('um número é passado como parâmetro ==> retorna o cosseno do número', () => {
+        test.each([
+            { numero: 1080    , retornoEsperado: 1                   },
+            { numero: 90      , retornoEsperado: 0                   },
+            { numero: 540     , retornoEsperado: -1                  },
+            { numero: 50.505  , retornoEsperado: 0.6360108809        }
+        ])('%j', ({ numero, retornoEsperado }) => {
+            expect(calculadora.cossenoGraus(numero)).toBeCloseTo(retornoEsperado);
+        });
+    });
+
+    describe('o parâmetro não é um número ==> lança exceção', () => {
+        test.each([
+            {numero: () => {}},
+            {numero: 'uma string'},
+            {numero: {}}
+        ])(
+            '%j',
+            ({numero}) => {
+                expect(() => {
+                    calculadora.cossenoGraus(numero);
+                }).toThrow(new TypeError());
+            }
+        );
+    });
+});
+
+describe('tangente em graus', () => {
+    describe('um número é passado como parâmetro ==> retorna a tangente do número', () => {
+        test.each([
+            { numero: 360              , retornoEsperado: 0                   },
+            { numero: 77               , retornoEsperado: 4.33147587428       },
+            { numero: 225              , retornoEsperado: 1                   },
+            { numero: -28.1475         , retornoEsperado: -0.53501613603      }
+        ])('%j', ({ numero, retornoEsperado }) => {
+            expect(calculadora.tangenteGraus(numero)).toBeCloseTo(retornoEsperado);
+        });
+    });
+
+    describe('o cosseno do número é igual a 0 ==> lança exceção', () => {
+        test.each([
+            {numero: 990},
+            {numero: 630}
+        ])(
+            '%j',
+            ({numero}) => {
+                expect(() => {
+                    calculadora.tangenteGraus(numero);
+                }).toThrow(new Error('Tangente não existente'));
+            }
+        );
+    });
+
+    describe('o parâmetro não é um número ==> lança exceção', () => {
+        test.each([
+            {numero: () => {}},
+            {numero: 'uma string'},
+            {numero: {}}
+        ])(
+            '%j',
+            ({numero}) => {
+                expect(() => {
+                    calculadora.tangenteGraus(numero);
                 }).toThrow(new TypeError());
             }
         );
