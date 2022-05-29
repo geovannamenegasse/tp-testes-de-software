@@ -310,3 +310,101 @@ describe('divisores', () => {
         );
     });
 });
+
+describe('seno', () => {
+    describe('um número é passado como parâmetro ==> retorna o seno do número', () => {
+        test.each([
+            { numero: 0                , retornoEsperado: 0                   },
+            { numero: Math.PI / 2      , retornoEsperado: 1                   },
+            { numero: 7 * Math.PI / 2  , retornoEsperado: -1                  },
+            { numero: 2                , retornoEsperado: 0.90929742682       }
+        ])('%j', ({ numero, retornoEsperado }) => {
+            expect(calculadora.seno(numero)).toBe(retornoEsperado);
+        });
+    });
+
+    describe('o parâmetro não é um número ==> lança exceção', () => {
+        test.each([
+            {numero: () => {}},
+            {numero: 'uma string'},
+            {numero: {}}
+        ])(
+            '%j',
+            ({numero}) => {
+                expect(() => {
+                    calculadora.seno(numero);
+                }).toThrow(new TypeError());
+            }
+        );
+    });
+});
+
+describe('cosseno', () => {
+    describe('um número é passado como parâmetro ==> retorna o cosseno do número', () => {
+        test.each([
+            { numero: 0                , retornoEsperado: 1                   },
+            { numero: Math.PI / 2      , retornoEsperado: 0                   },
+            { numero: 7 * Math.PI      , retornoEsperado: -1                  },
+            { numero: 4                , retornoEsperado: -0.65364362086      }
+        ])('%j', ({ numero, retornoEsperado }) => {
+            expect(calculadora.cosseno(numero)).toBe(retornoEsperado);
+        });
+    });
+
+    describe('o parâmetro não é um número ==> lança exceção', () => {
+        test.each([
+            {numero: () => {}},
+            {numero: 'uma string'},
+            {numero: {}}
+        ])(
+            '%j',
+            ({numero}) => {
+                expect(() => {
+                    calculadora.cosseno(numero);
+                }).toThrow(new TypeError());
+            }
+        );
+    });
+});
+
+describe('tangente', () => {
+    describe('um número é passado como parâmetro ==> retorna a tangente do número', () => {
+        test.each([
+            { numero: 0                , retornoEsperado: 0                   },
+            { numero: -1               , retornoEsperado: -1.55740772465      },
+            { numero: Math.PI / 4      , retornoEsperado: 1                   },
+            { numero: 2                , retornoEsperado: -2.18503986326      }
+        ])('%j', ({ numero, retornoEsperado }) => {
+            expect(calculadora.tangente(numero)).toBe(retornoEsperado);
+        });
+    });
+
+    describe('o cosseno do número é igual a 0 ==> lança exceção', () => {
+        test.each([
+            {numero: -47.7644},
+            {numero: -140}
+        ])(
+            '%j',
+            ({numero}) => {
+                expect(() => {
+                    calculadora.tangente(numero);
+                }).toThrow(new Error('Tangente não existente'));
+            }
+        );
+    });
+
+    describe('o parâmetro não é um número ==> lança exceção', () => {
+        test.each([
+            {numero: () => {}},
+            {numero: 'uma string'},
+            {numero: {}}
+        ])(
+            '%j',
+            ({numero}) => {
+                expect(() => {
+                    calculadora.tangente(numero);
+                }).toThrow(new TypeError());
+            }
+        );
+    });
+});
