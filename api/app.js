@@ -17,6 +17,7 @@ var fatorialRouter = require('./routes/fatorial');
 var senoRouter = require('./routes/seno');
 var cossenoRouter = require('./routes/cosseno');
 var tangenteRouter = require('./routes/tangente');
+var raizQuadradaRouter = require('./routes/raizquadrada');
 
 var app = express();
 
@@ -41,6 +42,7 @@ app.use('/fatorial', fatorialRouter);
 app.use('/seno', senoRouter);
 app.use('/cosseno', cossenoRouter);
 app.use('/tangente', tangenteRouter);
+app.use('/raizquadrada', raizQuadradaRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

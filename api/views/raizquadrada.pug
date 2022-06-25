@@ -15,13 +15,10 @@ head
             | Calculadora
         // Modal Body
         .modal-body
-          form(role='form' method='POST' action='/subtracao')
+          form(role='form' method='POST' action='/raizquadrada')
             div.form-group
               label(for='num1') Número 1:
-              input#name.form-control(type='number', placeholder='Número 1' name='num1')
-            div.form-group
-              label(for='num2') Número 2:
-              input#email.form-control(type='number', placeholder='Número 2' name='num2')
+              input#name.form-control(placeholder='Número' name='num1')
             button.btn.btn-primary(type="submit", name="asdf") = 
         // Modal Footer
         .modal-footer
