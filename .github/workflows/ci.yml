@@ -22,3 +22,5 @@ jobs:
         working-directory: ${{ github.workspace }}/api
       - run: npm test
         working-directory: ${{ github.workspace }}/api
+      - run: npx jest --coverage
+        working-directory: ${{ github.workspace }}/api
