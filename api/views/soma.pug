@@ -11,7 +11,7 @@ head
           button.close(type="button", data-dismiss="modal")
             span(aria-hidden="true") ×
             span.sr-only Close
-          h4#myModalLabel.modal-title
+          h3#myModalLabel.modal-title
             | Calculadora
         // Modal Body
         .modal-body
@@ -25,4 +25,4 @@ head
             button.btn.btn-primary(type="submit", name="asdf") = 
         // Modal Footer
         .modal-footer
-          h4 #{resultado}
+          h4.class#id(name="result") #{resultado}
